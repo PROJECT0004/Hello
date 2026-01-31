@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PYQ</title>
+
+<style>
+:root {
+  --bg: #f6f7fb;
+  --card-bg: #ffffff;
+  --sheet-bg: #f6f7fb;
+  --shadow-light: rgba(255,255,255,0.9);
+  --shadow-dark: rgba(0,0,0,0.12);
+  --text: #222;
+}
+
+
+body.dark {
+  --bg: #0f1115;
+  --card-bg: #161a22;
+  --sheet-bg: #161a22;
+  --shadow-light: rgba(255,255,255,0.03);
+  --shadow-dark: rgba(0,0,0,0.9);
+  --text: #f5f7fa;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: system-ui, sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 20px;
+  background: radial-gradient(circle at top, #1a1f2b 0%, var(--bg) 40%);
+  color: var(--text);
+  transition: 0.4s;
+}
+
+/* 🌙 Toggle */
+.toggle {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  width: 48px;
+  height: 26px;
+  border-radius: 20px;
+  background: linear-gradient(145deg, #ddd, #f5f5f5);
+  cursor: pointer;
+}
+.toggle::after {
+  content: '';
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: white;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  transition: 0.4s;
+}
+body.dark .toggle {
+  background: linear-gradient(145deg, #0b0d12, #1c2230);
+}
+body.dark .toggle::after {
+  transform: translateX(22px);
+  background: #4da3ff;
+}
+
+/* 🎓 Filter */
+.filter-bar {
+  display: flex;
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.filter {
+  flex: 1;
+  padding: 14px;
+  border-radius: 18px;
+  background: var(--card-bg);
+  box-shadow:
+    8px 8px 18px var(--shadow-dark),
+    -8px -8px 18px var(--shadow-light);
+}
+
+.filter select {
+  width: 100%;
+  background: transparent;
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  outline: none;
+}
+
+/* Layout */
+.container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+/* Card */
+.card {
+  background: var(--card-bg);
+  border-radius: 26px;
+  padding: 22px;
+  height: 240px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow:
+    12px 12px 28px var(--shadow-dark),
+    -12px -12px 28px var(--shadow-light);
+}
+
+/* Progress */
+.progress-track {
+  height: 10px;
+  background: rgba(255,255,255,0.2);
+  border-radius: 10px;
+}
+.progress-fill {
+  height: 100%;
+  width: 0;
+  border-radius: 10px;
+  transition: width 0.6s ease;
+}
+
+/* Bottom area */
+.bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+/* Text above button */
+.card-title {
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.3;
+  margin-bottom: 6px;
+  color: var(--text);
+}
+
+/* Button */
+.action-btn {
+  width: 150px;
+  height: 34px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 800;
+  color: #fff;
+  text-decoration: none;
+}
+
+/* Avatar */
+.avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+}
+
+/* Themes */
+.blue .progress-fill, .blue .avatar, .blue .action-btn { background: #2ec9f0; }
+.orange .progress-fill, .orange .avatar, .orange .action-btn { background: #ff8c42; }
+.green .progress-fill, .green .avatar, .green .action-btn { background: #27c281; }
+.pink .progress-fill, .pink .avatar, .pink .action-btn { background: #ff5fa2; }
+
+/* Responsive */
+@media (min-width: 600px) {
+  .container { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 1024px) {
+  .container { grid-template-columns: repeat(4, 1fr); }
+}
+
+
+/* FOOTER */
+footer{
+  margin-top:40px;
+  padding:26px;
+  
+  text-align:center;
+  border-radius:26px 26px 0 0;
+}
+
+
+
+</style>
+</head>
+
+<body>
+
+<div class="toggle" id="toggle"></div>
+
+<!-- 🎓 FILTER -->
+<div class="filter-bar">
+  <div class="filter">
+    <select id="yearFilter">
+      <option value="all">All Years</option>
+      <option value="2024">2024</option>
+      <option value="2023">2023</option>
+    </select>
+  </div>
+  <div class="filter">
+    <select id="semFilter">
+      <option value="all">All Semesters</option>
+      <option value="1">Semester 1</option>
+      <option value="2">Semester 2</option>
+    </select>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="card blue" data-year="2024" data-sem="1">
+    <div class="progress-track"><div class="progress-fill" data-width="50%"></div></div>
+    <div class="bottom">
+      <div>
+        <div class="card-title">
+          BTECH CSE PYQ 2024 SUBJECT MDU ROHTAK – ENGLISH
+        </div>
+        <a href="english" class="action-btn">VIEW PYQ</a>
+      </div>
+      <div class="avatar"></div>
+    </div>
+  </div>
+
+  <div class="card orange" data-year="2024" data-sem="2">
+    <div class="progress-track"><div class="progress-fill" data-width="100%"></div></div>
+    <div class="bottom">
+      <div>
+        <div class="card-title">
+          BTECH CSE PYQ 2024 SUBJECT MDU ROHTAK – MATHS
+        </div>
+        <a href="maths" class="action-btn">VIEW PYQ</a>
+      </div>
+      <div class="avatar"></div>
+    </div>
+  </div>
+
+  <div class="card green" data-year="2023" data-sem="1">
+    <div class="progress-track"><div class="progress-fill" data-width="50%"></div></div>
+    <div class="bottom">
+      <div>
+        <div class="card-title">
+          BTECH CSE PYQ 2024 SUBJECT MDU ROHTAK – PHYSICS
+        </div>
+        <a href="physics" class="action-btn">VIEW PYQ</a>
+      </div>
+      <div class="avatar"></div>
+    </div>
+  </div>
+
+  <div class="card pink" data-year="2023" data-sem="2">
+    <div class="progress-track"><div class="progress-fill" data-width="100%"></div></div>
+    <div class="bottom">
+      <div>
+        <div class="card-title">
+          BTECH CSE PYQ 2024 SUBJECT MDU ROHTAK – CHEMISTRY
+        </div>
+        <a href="https://www.mdustudy.com/papers/btech-1-sem-english-3014-dec-2023.pdf"
+           class="action-btn">VIEW PYQ</a>
+      </div>
+      <div class="avatar"></div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+/* Dark mode */
+document.getElementById('toggle').onclick = () =>
+  document.body.classList.toggle('dark');
+
+/* Progress */
+document.querySelectorAll('.progress-fill').forEach(bar => {
+  setTimeout(() => bar.style.width = bar.dataset.width, 300);
+});
+
+/* Filter logic */
+const yearFilter = document.getElementById('yearFilter');
+const semFilter = document.getElementById('semFilter');
+const cards = document.querySelectorAll('.card');
+
+function filterCards() {
+  const year = yearFilter.value;
+  const sem = semFilter.value;
+
+  cards.forEach(card => {
+    const matchYear = year === 'all' || card.dataset.year === year;
+    const matchSem = sem === 'all' || card.dataset.sem === sem;
+    card.style.display = matchYear && matchSem ? 'flex' : 'none';
+  });
+}
+
+yearFilter.onchange = semFilter.onchange = filterCards;
+</script>
+
+<footer>
+  © 2026 International Islamic University Dubai
+  <div class="builder">Built By Agastya Dubey</div>
+</footer>
+
+</body>
+</html>
